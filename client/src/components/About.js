@@ -4,8 +4,8 @@ import { connect } from 'react-redux'
 import { Header, Button, Container, Input, Form } from 'semantic-ui-react'
 import Select from 'react-select'
 import 'react-select/dist/react-select.css'
-import { imgData } from './Variables.js'
-import { signature } from './Variables.js'
+import { imgData, signature } from './Variables.js'
+
 var moment = require('moment');
 const jsPDF = require('jspdf')
 moment().format()
@@ -21,8 +21,17 @@ class About extends React.Component {
     //make a good looking document
     build = (companyName, timeclock1, timeclock2, timeclock3, quantity1, quantity2, quantity3, discount1, discount2, discount3, x, y, z) => {
         
-        const total = (timeclock1 * quantity1)
+       
         var doc = new jsPDF()
+        const total1 = (timeclock1 * quantity1) - discount1
+        const total2 = (timeclock2 * quantity2) - discount2
+        const total3 = (timeclock3 * quantity3) - discount3
+
+        const combinedTotal = total1 + total2 + total3
+        
+        const totalDecimal1 = total1.toFixed(2)
+        const totalDecimal2 = total2.toFixed(2)
+        const totalDecimal3 = total3.toFixed(2)
 
         if(timeclock1 == 1000){
             x = 'Synel 715'
@@ -116,7 +125,6 @@ class About extends React.Component {
         
         
         doc.addImage(imgData, 'JPEG', 130, 0, 90, 52);
-        doc.addImage(signature, 'JPEG', 35, 150, 200, 120);
         doc.setFontSize(15);
         doc.text(moment().format('MM-DD-YYYY'), 5, 10)
         doc.text('This proposal has been developed for:', 5, 25)
@@ -125,22 +133,34 @@ class About extends React.Component {
         doc.setDrawColor(0)
         doc.setFillColor(124,252,0)
         doc.rect(0, 60, 210, 9, 'FD')
+        doc.setFontType("bold");
         doc.text('Hardware', 6, 67.5)
+        doc.setFontType("normal");
+        doc.setFontSize(14);
         doc.text(x, 10, 80)
-        doc.text(quantity1 + ' clock, ' + timeclock1 + ' per', 90, 80)
-        doc.text(total, 10, 80)
+        doc.text(quantity1 + ' clock @ ' + timeclock1 + ' per', 100, 80)
+        doc.text(' $ ' + totalDecimal1 , 175, 80)
         if(quantity2 !== '') {
             doc.text(y, 10, 90)
-            doc.text(quantity2 + ' clock, ' + timeclock2 + ' per', 90, 90)
+            doc.text(quantity2 + ' clock @ ' + timeclock2 + ' per', 100, 90)
+            doc.text(' $ ' + totalDecimal2, 175, 90) 
         }
         if(quantity3 !== '') {
             doc.text(z, 10, 100)
-            doc.text(quantity3 + ' clock, ' + timeclock3 + ' per', 90, 100)
+            doc.text(quantity3 + ' clock @ ' + timeclock3 + ' per', 100, 100)
+            doc.text(' $ ' + totalDecimal3, 175, 100)
         }
-        doc.rect(148, 98, 57, 10)
-        doc.setFontSize(25);
-        doc.setFontSize(26);
-        
+     
+        //doc.rect(148, 98, 57, 10)
+        doc.setFontSize(14);
+        doc.text('Total: $ '+combinedTotal, 150, 110 )
+        doc.setFontSize(14);
+        doc.text('Agreed to and Accepted By: ', 15, 200)
+        doc.text('Name:_______________________', 15, 210)
+        doc.text('Company Name:_____________________', 100, 210)
+        doc.text('Date Signed:______________________', 105, 230)
+        doc.text('Title:________________________', 15, 220)
+        doc.text('Signature:____________________', 15, 230)
         doc.save('DACT.pdf')
        
         }
@@ -191,19 +211,19 @@ class About extends React.Component {
                     Pick your Timeclock:
                     <select value={timeclock1} name='timeclock1' onChange={this.setValue}>
                         <option value=" ">-- choose --</option>
-                        <option value='1000'>Synel 715</option>
+                        <option value='1000.00'>Synel 715</option>
                         <option value='1143.75'>Synel 765</option>
-                        <option value='394'>ZK T4</option>
-                        <option value="1700">HandPunch 1000</option>
-                        <option value="2450">HandPunch 3000</option>
-                        <option value="2976">HandPunch 4000</option>
+                        <option value='394.00'>ZK T4</option>
+                        <option value="1700.00">HandPunch 1000</option>
+                        <option value="2450.00">HandPunch 3000</option>
+                        <option value="2976.00">HandPunch 4000</option>
                         <option value="2042.50">ATS Prodigy</option>
                         <option value="1701.25">ATS Maximus</option>
-                        <option value="1.5">ATS Maximus Severe Duty</option>
-                        <option value="762">MacSema BC3100</option>
-                        <option value="588">SST</option>
-                        <option value="270">TRANZ 380</option>
-                        <option value="1">Telephony</option>
+                        <option value="1.50">ATS Maximus Severe Duty</option>
+                        <option value="762.00">MacSema BC3100</option>
+                        <option value="588.00">SST</option>
+                        <option value="270.00">TRANZ 380</option>
+                        <option value="1.00">Telephony</option>
                     </select>
                      </label>
                     
@@ -225,19 +245,19 @@ class About extends React.Component {
                     Pick your Timeclock:
                     <select value={timeclock2} name='timeclock2' onChange={this.setValue}>
                         <option value=" ">-- choose --</option>
-                        <option value='1000'>Synel 715</option>
+                        <option value='1000.00'>Synel 715</option>
                         <option value='1143.75'>Synel 765</option>
-                        <option value='394'>ZK T4</option>
-                        <option value="1700">HandPunch 1000</option>
-                        <option value="2450">HandPunch 3000</option>
-                        <option value="2976">HandPunch 4000</option>
+                        <option value='394.00'>ZK T4</option>
+                        <option value="1700.00">HandPunch 1000</option>
+                        <option value="2450.00">HandPunch 3000</option>
+                        <option value="2976.00">HandPunch 4000</option>
                         <option value="2042.50">ATS Prodigy</option>
                         <option value="1701.25">ATS Maximus</option>
-                        <option value="1">ATS Maximus Severe Duty</option>
-                        <option value="762">MacSema BC3100</option>
-                        <option value="588">SST</option>
-                        <option value="270">TRANZ 380</option>
-                        <option value="1">Telephony</option>
+                        <option value="1.00">ATS Maximus Severe Duty</option>
+                        <option value="762.00">MacSema BC3100</option>
+                        <option value="588.00">SST</option>
+                        <option value="270.00">TRANZ 380</option>
+                        <option value="1.00">Telephony</option>
                     </select>
                      </label>
                     
@@ -259,19 +279,19 @@ class About extends React.Component {
                     Pick your Timeclock:
                     <select value={timeclock3} name='timeclock3' onChange={this.setValue}>
                         <option value=" ">-- choose --</option>
-                        <option value='1000'>Synel 715</option>
+                        <option value='1000.00'>Synel 715</option>
                         <option value='1143.75'>Synel 765</option>
-                        <option value='394'>ZK T4</option>
-                        <option value="1700">HandPunch 1000</option>
-                        <option value="2450">HandPunch 3000</option>
-                        <option value="2976">HandPunch 4000</option>
+                        <option value='394.00'>ZK T4</option>
+                        <option value="1700.00">HandPunch 1000</option>
+                        <option value="2450.00">HandPunch 3000</option>
+                        <option value="2976.00">HandPunch 4000</option>
                         <option value="2042.50">ATS Prodigy</option>
                         <option value="1701.25">ATS Maximus</option>
-                        <option value="1">ATS Maximus Severe Duty</option>
-                        <option value="762">MacSema BC3100</option>
-                        <option value="588">SST</option>
-                        <option value="270">TRANZ 380</option>
-                        <option value="1">Telephony</option>
+                        <option value="1.00">ATS Maximus Severe Duty</option>
+                        <option value="762.00">MacSema BC3100</option>
+                        <option value="588.00">SST</option>
+                        <option value="270.00">TRANZ 380</option>
+                        <option value="1.00">Telephony</option>
                     </select>
                      </label>
                     
