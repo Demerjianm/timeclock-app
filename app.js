@@ -8,7 +8,9 @@ const bodyParser = require('body-parser');
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy
 const mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/timeclocks');
+const mongoUri = process.env.MONGODB_URI || 'mongodb://localhost/timeclocks'
+mongoose.connect(mongoUri)
+
 
 const app = express();
 
