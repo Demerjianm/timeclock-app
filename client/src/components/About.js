@@ -7,6 +7,7 @@ import 'react-select/dist/react-select.css'
 import { imgData, signature } from './Variables.js'
 
 var moment = require('moment');
+var numeral = require('numeral');
 const jsPDF = require('jspdf')
 moment().format()
 
@@ -22,16 +23,20 @@ class About extends React.Component {
     build = (companyName, timeclock1, timeclock2, timeclock3, quantity1, quantity2, quantity3, discount1, discount2, discount3, x, y, z) => {
         
        
-        var doc = new jsPDF()
+        var doc = new jsPDF('p', 'mm', [279, 215])
         const total1 = (timeclock1 * quantity1) - discount1
         const total2 = (timeclock2 * quantity2) - discount2
         const total3 = (timeclock3 * quantity3) - discount3
 
+        const timeclockFormatted1 = numeral(timeclock1).format('0,0.00')
+        const timeclockFormatted2 = numeral(timeclock2).format('0,0.00')
+        const timeclockFormatted3 = numeral(timeclock3).format('0,0.00')
+
         const combinedTotal = total1 + total2 + total3
-        
-        const totalDecimal1 = total1.toFixed(2)
-        const totalDecimal2 = total2.toFixed(2)
-        const totalDecimal3 = total3.toFixed(2)
+        const totalDecimal1 = numeral(total1).format('0,0.00')
+        const totalDecimal2 = numeral(total2).format('0,0.00')
+        const totalDecimal3 = numeral(total3).format('0,0.00')
+        const combinedTotalFormatted = numeral(combinedTotal).format('0,0.00')
 
         if(timeclock1 == 1000){
             x = 'Synel 715'
@@ -123,44 +128,45 @@ class About extends React.Component {
 
         
         
-        
-        doc.addImage(imgData, 'JPEG', 130, 0, 90, 52);
+        doc.addImage(imgData, 'JPEG', 120, 0, 90, 52);
         doc.setFontSize(15);
-        doc.text(moment().format('MM-DD-YYYY'), 5, 10)
-        doc.text('This proposal has been developed for:', 5, 25)
+        doc.text(moment().format('MM-DD-YYYY'), 0, 10)
+        doc.text('This proposal has been developed for:', 0, 25)
         doc.setFontSize(20)
         doc.text(companyName, 5, 38)
         doc.setDrawColor(0)
         doc.setFillColor(124,252,0)
-        doc.rect(0, 60, 210, 9, 'FD')
+        doc.rect(0, 60, 215, 9, 'FD')
         doc.setFontType("bold");
         doc.text('Hardware', 6, 67.5)
+        doc.text('Qty      Price', 100, 67.5 )
         doc.setFontType("normal");
         doc.setFontSize(14);
         doc.text(x, 10, 80)
-        doc.text(quantity1 + ' clock @ ' + timeclock1 + ' per', 100, 80)
+        doc.text(quantity1 + '    @  $ ' + timeclockFormatted1, 105, 80)
         doc.text(' $ ' + totalDecimal1 , 175, 80)
         if(quantity2 !== '') {
             doc.text(y, 10, 90)
-            doc.text(quantity2 + ' clock @ ' + timeclock2 + ' per', 100, 90)
+            doc.text(quantity2 + '    @  $ ' + timeclockFormatted2, 105, 90)
             doc.text(' $ ' + totalDecimal2, 175, 90) 
         }
         if(quantity3 !== '') {
             doc.text(z, 10, 100)
-            doc.text(quantity3 + ' clock @ ' + timeclock3 + ' per', 100, 100)
+            doc.text(quantity3 + '    @  $ ' + timeclockFormatted3, 105, 100)
             doc.text(' $ ' + totalDecimal3, 175, 100)
         }
+        doc.text('*Does not include taxes or delivery fees', 6, 110)
      
         //doc.rect(148, 98, 57, 10)
         doc.setFontSize(14);
-        doc.text('Total: $ '+combinedTotal, 150, 110 )
+        doc.text('Total: $ '+combinedTotalFormatted, 163, 110 )
         doc.setFontSize(14);
-        doc.text('Agreed to and Accepted By: ', 15, 200)
-        doc.text('Name:_______________________', 15, 210)
-        doc.text('Company Name:_____________________', 100, 210)
-        doc.text('Date Signed:______________________', 105, 230)
-        doc.text('Title:________________________', 15, 220)
-        doc.text('Signature:____________________', 15, 230)
+        doc.text('Agreed to and Accepted By: ', 10, 200)
+        doc.text('Name:________________________', 10, 210)
+        doc.text('Company Name:_____________________', 110, 210)
+        doc.text('Date Signed:______________________', 115, 230)
+        doc.text('Title:_________________________', 10, 220)
+        doc.text('Signature:_____________________', 10, 230)
         doc.save('DACT.pdf')
        
         }

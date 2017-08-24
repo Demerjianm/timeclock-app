@@ -7,11 +7,13 @@
     "build-production": "cd client/ && npm install --only=dev && npm install && npm run build"
   },
   "dependencies": {
+    "aws-sdk": "^2.103.0",
     "body-parser": "~1.17.1",
     "cookie-parser": "~1.4.3",
     "debug": "~2.6.3",
     "express": "~4.15.2",
     "express-session": "^1.15.5",
+    "geddy": "^13.0.8",
     "mongoose": "^4.9.9",
     "morgan": "~1.8.1",
     "passport": "^0.4.0",
