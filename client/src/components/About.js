@@ -135,7 +135,7 @@ class About extends React.Component {
         doc.setFontSize(20)
         doc.text(companyName, 5, 38)
         doc.setDrawColor(0)
-        doc.setFillColor(124,252,0)
+        doc.setFillColor(120,190,32)
         doc.rect(0, 60, 215, 9, 'FD')
         doc.setFontType("bold");
         doc.text('Hardware', 6, 67.5)
@@ -155,7 +155,9 @@ class About extends React.Component {
             doc.text(quantity3 + '    @  $ ' + timeclockFormatted3, 105, 100)
             doc.text(' $ ' + totalDecimal3, 175, 100)
         }
-        doc.text('*Does not include taxes or delivery fees', 6, 110)
+        doc.setLineWidth(.5);
+        doc.line(162, 105, 200, 105);
+        doc.text('*Does not include taxes or delivery fees', 6, 135)
      
         //doc.rect(148, 98, 57, 10)
         doc.setFontSize(14);
