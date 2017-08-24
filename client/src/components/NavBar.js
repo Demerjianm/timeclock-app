@@ -6,11 +6,11 @@ import { logout } from '../actions/user';
 
 const links = [
   { name: 'Home', path: '/' },
-  { name: 'About', path: '/about'},
 ]
 
 const authenticatedLinks = [
   { name: 'Dashboard', path: '/dashboard' },
+  { name: 'Timeclocks', path: '/about'},
   { name: 'Logout' }
 ]
 
