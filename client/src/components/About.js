@@ -208,13 +208,13 @@ class About extends React.Component {
                         this.build(companyName, timeclock1, timeclock2, timeclock3, quantity1, quantity2, quantity3, discount1, discount2, discount3, x, y, z)
                         }}
                      >
-                <Form.Field>  
+                <Form.Field width={8}>  
                 <label>
                     Company Name:
                 <Input type='text' value={companyName} name='companyName' onChange={this.setValue} />
                 </label>       
                 </Form.Field>     
-                <Form.Field>
+                <Form.Field width={3}>
                     <label>
                     Pick your Timeclock:
                     <select value={timeclock1} name='timeclock1' onChange={this.setValue}>
@@ -236,19 +236,19 @@ class About extends React.Component {
                      </label>
                     
                 </Form.Field>
-                <Form.Field>  
+                <Form.Field width={2}>  
                 <label>
                     How many:
                 <Input type='text' value={quantity1} name='quantity1' onChange={this.setValue} />
                 </label>       
                 </Form.Field>
-                <Form.Field>
+                <Form.Field width={2}>
                 <label>
                     Discount:
                 <Input type='text' value={discount1} name='discount1' onChange={this.setValue} />
                 </label>
                 </Form.Field> 
-                <Form.Field>
+                <Form.Field width={3}>
                     <label>
                     Pick your Timeclock:
                     <select value={timeclock2} name='timeclock2' onChange={this.setValue}>
@@ -270,19 +270,19 @@ class About extends React.Component {
                      </label>
                     
                 </Form.Field>
-                <Form.Field>  
+                <Form.Field width={2}>  
                 <label>
                     How many:
                 <Input type='text' value={quantity2} name='quantity2' onChange={this.setValue} />
                 </label>       
                 </Form.Field>
-                <Form.Field>
+                <Form.Field width={2}>
                 <label>
                     Discount:
                 <Input type='text' value={discount2} name='discount2' onChange={this.setValue} />
                 </label>
                 </Form.Field> 
-                <Form.Field>
+                <Form.Field width={3}>
                     <label>
                     Pick your Timeclock:
                     <select value={timeclock3} name='timeclock3' onChange={this.setValue}>
@@ -304,13 +304,13 @@ class About extends React.Component {
                      </label>
                     
                 </Form.Field>
-                <Form.Field>  
+                <Form.Field width={2}>  
                 <label>
                     How many:
                 <Input type='text' value={quantity3} name='quantity3' onChange={this.setValue} />
                 </label>       
                 </Form.Field>
-                <Form.Field>
+                <Form.Field width={2}>
                 <label>
                     Discount:
                 <Input type='text' value={discount3} name='discount3' onChange={this.setValue} />
