@@ -8,6 +8,7 @@ const bodyParser = require('body-parser');
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy
 const mongoose = require('mongoose');
+const timeclocks = require('./routes/timeclocks')
 const mongoUri = process.env.MONGODB_URI || 'mongodb://localhost/timeclocks'
 mongoose.connect(mongoUri)
 
@@ -45,6 +46,7 @@ passport.deserializeUser(User.deserializeUser());
 
 //AUTH ROUTES
 app.use('/api/auth', auth);
+app.use('/api/timeclocks', timeclocks)
 
 app.get('*', (request, response) => {
   response.sendFile(path.resolve(__dirname, '../client/build', 'index.html'));

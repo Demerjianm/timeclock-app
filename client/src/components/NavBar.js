@@ -12,6 +12,7 @@ const links = [
 const authenticatedLinks = [
   { name: 'Dashboard', path: '/dashboard' },
   { name: 'Timeclocks', path: '/about'},
+  { name: 'TimeclockForm', path: '/timeclockform'},
   { name: 'Logout' }
 ]
 

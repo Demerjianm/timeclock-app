@@ -7,6 +7,7 @@ import Auth from './components/Auth';
 import Dashboard from './components/Dashboard';
 import FetchUser from './components/FetchUser';
 import ProtectedRoute from './components/ProtectedRoute'
+import TimeclockForm from './components/TimeclockForm'
 
 const App = () => (
   <div>
@@ -16,6 +17,7 @@ const App = () => (
         <Route exact path="/" component={Home} />
         <Route path="/about" component={About} />
         <Route path="/dashboard" component={Dashboard} />
+        <Route path='/timeclockform' component={TimeclockForm} />
         <Route path="/register" render={ (props) => <Auth {...props} title="Register" /> } />
         <Route path="/login" render={ (props) => <Auth {...props} title="Login" /> } />
         <ProtectedRoute path="/dashboard" component={Dashboard} />

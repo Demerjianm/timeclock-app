@@ -12,6 +12,7 @@
     "body-parser": "~1.17.1",
     "cookie-parser": "~1.4.3",
     "debug": "~2.6.3",
+    "dispatch": "^1.0.1",
     "express": "~4.15.2",
     "express-session": "^1.15.5",
     "geddy": "^13.0.8",
@@ -19,6 +20,7 @@
     "morgan": "~1.8.1",
     "passport": "^0.4.0",
     "passport-local": "^1.0.0",
-    "passport-local-mongoose": "^4.1.0"
+    "passport-local-mongoose": "^4.1.0",
+    "react-redux": "^5.0.6"
   }
 }
