@@ -5,6 +5,7 @@ import { Header, Button, Container, Input, Form } from 'semantic-ui-react'
 import Select from 'react-select'
 import 'react-select/dist/react-select.css'
 import { imgData, signature } from './Variables.js'
+import TimeclockForm from './TimeclockForm.js'
 
 var moment = require('moment');
 var numeral = require('numeral');
@@ -219,7 +220,7 @@ class About extends React.Component {
                     Pick your Timeclock:
                     <select value={timeclock1} name='timeclock1' onChange={this.setValue}>
                         <option value=" ">-- choose --</option>
-                        <option value='1000.00'>Synel 715</option>
+                        <option value='1000.00'>{this.props.timeclock}</option>
                         <option value='1143.75'>Synel 765</option>
                         <option value='394.00'>ZK T4</option>
                         <option value="1700.00">HandPunch 1000</option>

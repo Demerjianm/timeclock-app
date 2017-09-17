@@ -6,6 +6,13 @@ import { addTimeclock, getTimeclocks, deleteTimeclock } from '../actions/timeclo
 
 class TimeclockForm extends React.Component {
 
+  state = { edit: false }
+
+  toggleEdit = (edit) => {
+    this.setState({ edit: !this.state.edit });
+    console.log(this.state.edit)
+  }
+
   componentDidMount = () => {
     let { _id } = this.props;
     this.props.dispatch(getTimeclocks(_id));
@@ -30,7 +37,7 @@ class TimeclockForm extends React.Component {
   }
 */
   displayTimeclocks = () => {
-    let timeclocks = this.props
+    let timeclocks, edit = this.props
     return this.props.timeclocks.map( timeclock => {
      return (
        <li key={timeclock._id} className="collection-item">
@@ -49,8 +56,12 @@ class TimeclockForm extends React.Component {
             color="red"
             name="remove"
             onClick={ () => this.handleDelete(timeclock)}
-
-          />
+            />
+            <Icon 
+              color='blue'
+              name='add'
+              onClick={ () => this.toggleEdit()}
+              />
            </div>
          </div>
        </li>
@@ -119,4 +130,4 @@ const mapStateToProps = (state, props) => {
 
 // MSTP - grabs state out of store, pass in as a prop
 
-export default withRouter(connect(mapStateToProps)(TimeclockForm));
+export default connect(mapStateToProps)(TimeclockForm);
